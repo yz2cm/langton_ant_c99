@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include "matrix.h"
 #include "common.h"
@@ -27,13 +26,9 @@ void matrix_add_cell(matrix_t *matrix, cell_color_t color) {
     matrix->length++;
 }
 
-void matrix_print(size_t width, const matrix_t *matrix) {
-    for (size_t length = 0; length < matrix->length; ++length) {
-        cell_color_t color = matrix->color[length];
-        printf("%c", color_to_symbol(color));
-
-        if(length != 0 && length % width == (width - 1)) {
-            printf("\n");
-        }
+void map_matrix(const matrix_t *matrix, size_t width, void (*action)(cell_color_t *, size_t)) {
+    for (size_t i = 0; i < matrix->length; i += width) {
+        size_t len = (i + width) < matrix->length ? width : matrix->length - i;
+        action(matrix->color + i, len);
     }
 }

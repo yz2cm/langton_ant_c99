@@ -5,6 +5,6 @@
 
 matrix_t *matrix_new();
 void matrix_add_cell(matrix_t *matrix, cell_color_t color);
-void matrix_print(size_t width, const matrix_t *matrix);
+void map_matrix(const matrix_t *matrix, size_t width, void (*action)(cell_color_t *, size_t));
 
 #endif

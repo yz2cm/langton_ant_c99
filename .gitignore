@@ -29,6 +29,7 @@
 *.dylib
 
 # Executables
+langton_ant
 *.exe
 *.out
 *.app

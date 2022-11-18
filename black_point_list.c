@@ -127,9 +127,13 @@ matrix_t* black_points_to_matrix(const black_point_list_t *list) {
     max.x = max_x_of_black_points(list);
     max.y = max_y_of_black_points(list);
     matrix_t *matrix = matrix_new();
+    point_t point = point_new_noheap(0, 0);
+
     for(int32_t y = min.y; y <= max.y; ++y) {
         for(int32_t x = min.x; x <= max.x; ++x) {
-            if (black_point_list_find(list, point_new_noheap(x, y)) == NULL) {
+            point.x = x;
+            point.y = y;
+            if (black_point_list_find(list, point) == NULL) {
                 matrix_add_cell(matrix, WHITE);
             } else {
                 matrix_add_cell(matrix, BLACK);

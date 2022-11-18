@@ -15,7 +15,7 @@ int main (void) {
     black_point_list_t *result = play(20000);
     matrix_t *matrix = black_points_to_matrix(result);
     size_t width = width_of_black_point_list(result);
-    map_matrix(matrix, width, write_symbol);
+    matrix_map(matrix, width, write_symbol);
 
     return 0;
 }

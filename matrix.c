@@ -26,7 +26,7 @@ void matrix_add_cell(matrix_t *matrix, cell_color_t color) {
     matrix->length++;
 }
 
-void map_matrix(const matrix_t *matrix, size_t width, void (*action)(cell_color_t *, size_t)) {
+void matrix_map(const matrix_t *matrix, size_t width, void (*action)(cell_color_t *, size_t)) {
     for (size_t i = 0; i < matrix->length; i += width) {
         size_t len = (i + width) < matrix->length ? width : matrix->length - i;
         action(matrix->color + i, len);

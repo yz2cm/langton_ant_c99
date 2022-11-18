@@ -1,4 +1,6 @@
 #include "play.h"
+#include "black_point_list.h"
+#include "ant.h"
 
 ant_t play_once(ant_t ant, black_point_list_t *list) {
         if (black_point_list_find(list, ant.point) == NULL) {

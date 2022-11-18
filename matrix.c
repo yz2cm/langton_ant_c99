@@ -37,11 +37,3 @@ void matrix_print(size_t width, const matrix_t *matrix) {
         }
     }
 }
-
-size_t width_of_matrix(black_point_list_t *list) {
-    int32_t minX = min_x_of_black_points(list);
-    int32_t maxX = max_x_of_black_points(list);
-    size_t width = maxX - minX + 1;
-
-    return width;
-}

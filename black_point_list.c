@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include "black_point_list.h"
+#include "matrix.h"
 
 black_point_list_t *black_point_list_new() {
     black_point_list_t* list = malloc(sizeof(*list));
@@ -109,6 +110,14 @@ int32_t min_y_of_black_points(const black_point_list_t *list) {
     }
 
     return min_y;
+}
+
+size_t width_of_black_point_list(black_point_list_t *list) {
+    int32_t minX = min_x_of_black_points(list);
+    int32_t maxX = max_x_of_black_points(list);
+    size_t width = maxX - minX + 1;
+
+    return width;
 }
 
 matrix_t* black_points_to_matrix(const black_point_list_t *list) {

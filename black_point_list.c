@@ -113,9 +113,9 @@ int32_t min_y_of_black_points(const black_point_list_t *list) {
 }
 
 size_t width_of_black_point_list(black_point_list_t *list) {
-    int32_t minX = min_x_of_black_points(list);
-    int32_t maxX = max_x_of_black_points(list);
-    size_t width = maxX - minX + 1;
+    int32_t min_x = min_x_of_black_points(list);
+    int32_t max_x = max_x_of_black_points(list);
+    size_t width = max_x - min_x + 1;
 
     return width;
 }

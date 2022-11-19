@@ -10,7 +10,7 @@ ant_t ant_new() {
     return ant;
 }
 
-ant_t move_forward_ant(const ant_t* ant) {
+ant_t ant_move_forward(const ant_t* ant) {
     ant_t ant_ = {
         .direction = ant->direction,
         .point = ant->point
@@ -29,7 +29,7 @@ ant_t move_forward_ant(const ant_t* ant) {
     return ant_;
 }
 
-ant_t rotate_right_ant(const ant_t* ant) {
+ant_t ant_rotate_right(const ant_t* ant) {
     ant_t ant_ = {
         .point = ant->point,
         .direction = (ant->direction + 1) % 4
@@ -38,7 +38,7 @@ ant_t rotate_right_ant(const ant_t* ant) {
     return ant_;
 }
 
-ant_t rotate_left_ant(const ant_t* ant) {
+ant_t ant_rotate_left(const ant_t* ant) {
     ant_t ant_ = {
         .point = ant->point,
         .direction = (4 + ant->direction - 1) % 4

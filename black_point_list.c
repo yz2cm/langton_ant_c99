@@ -76,7 +76,7 @@ void black_point_list_remove(const black_point_list_t *list, point_t point) {
     point_->used = false;
 }
 
-int32_t max_x_of_black_points(const black_point_list_t *list) {
+int32_t black_point_list_max_x(const black_point_list_t *list) {
     int max_x = list->points[0].x;
     for (size_t i = 0; i < list->length; ++i) {
         max_x = list->points[i].used && max_x < list->points[i].x ? list->points[i].x : max_x;
@@ -85,7 +85,7 @@ int32_t max_x_of_black_points(const black_point_list_t *list) {
     return max_x;
 }
 
-int32_t min_x_of_black_points(const black_point_list_t *list) {
+int32_t black_point_list_min_x(const black_point_list_t *list) {
     int min_x = list->points[0].x;
     for (size_t i = 0; i < list->length; ++i) {
         min_x = list->points[i].used && list->points[i].x < min_x ? list->points[i].x : min_x;
@@ -94,7 +94,7 @@ int32_t min_x_of_black_points(const black_point_list_t *list) {
     return min_x;
 }
 
-int32_t max_y_of_black_points(const black_point_list_t *list) {
+int32_t black_point_list_max_y(const black_point_list_t *list) {
     int max_y = list->points[0].y;
     for (size_t i = 0; i < list->length; ++i) {
         max_y = list->points[i].used && max_y < list->points[i].y ? list->points[i].y : max_y;
@@ -103,7 +103,7 @@ int32_t max_y_of_black_points(const black_point_list_t *list) {
     return max_y;
 }
 
-int32_t min_y_of_black_points(const black_point_list_t *list) {
+int32_t black_point_list_min_y(const black_point_list_t *list) {
     int min_y = list->points[0].y;
     for (size_t i = 0; i < list->length; ++i) {
         min_y = list->points[i].used && list->points[i].y < min_y ? list->points[i].y : min_y;
@@ -112,20 +112,20 @@ int32_t min_y_of_black_points(const black_point_list_t *list) {
     return min_y;
 }
 
-size_t width_of_black_point_list(black_point_list_t *list) {
-    int32_t min_x = min_x_of_black_points(list);
-    int32_t max_x = max_x_of_black_points(list);
+size_t black_point_list_width(black_point_list_t *list) {
+    int32_t min_x = black_point_list_min_x(list);
+    int32_t max_x = black_point_list_max_x(list);
     size_t width = max_x - min_x + 1;
 
     return width;
 }
 
-matrix_t* black_points_to_matrix(const black_point_list_t *list) {
+matrix_t* black_point_list_to_matrix(const black_point_list_t *list) {
     point_t min, max;
-    min.x = min_x_of_black_points(list);
-    min.y = min_y_of_black_points(list);
-    max.x = max_x_of_black_points(list);
-    max.y = max_y_of_black_points(list);
+    min.x = black_point_list_min_x(list);
+    min.y = black_point_list_min_y(list);
+    max.x = black_point_list_max_x(list);
+    max.y = black_point_list_max_y(list);
     matrix_t *matrix = matrix_new();
     point_t point = point_new_noheap(0, 0);
 

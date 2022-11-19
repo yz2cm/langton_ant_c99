@@ -3,6 +3,7 @@
 #include "common.h"
 #include "matrix.h"
 #include "black_point_list.h"
+#include "matrix_line_list.h"
 #include "play.h"
 
 void write_symbols(const matrix_line_t *a_line) {
@@ -17,8 +18,8 @@ void write_symbols(const matrix_line_t *a_line) {
 
 int main (void) {
     black_point_list_t *result = play(20000);
-    matrix_t *matrix = black_points_to_matrix(result);
-    size_t width = width_of_black_point_list(result);
+    matrix_t *matrix = black_point_list_to_matrix(result);
+    size_t width = black_point_list_width(result);
     matrix_line_list_t *line_list = matrix_split(matrix, width);
     matrix_line_list_map(line_list, write_symbols);
 

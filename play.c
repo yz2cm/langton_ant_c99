@@ -4,13 +4,13 @@
 
 ant_t play_once(ant_t ant, black_point_list_t *list) {
         if (black_point_list_find(list, ant.point) == NULL) {
-            ant = rotate_right_ant(&ant);
+            ant = ant_rotate_right(&ant);
             black_point_list_add(list, ant.point);
         } else {
-            ant = rotate_left_ant(&ant);
+            ant = ant_rotate_left(&ant);
             black_point_list_remove(list, ant.point);
         }
-        ant = move_forward_ant(&ant);
+        ant = ant_move_forward(&ant);
 
         return ant;
 }

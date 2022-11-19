@@ -49,9 +49,9 @@ typedef struct {
     size_t length;
 } matrix_line_list_t;
 
-point_t point_new_noheap(int32_t x, int32_t y);
-point_t* point_new(int32_t x, int32_t y);
-char color_to_symbol(cell_color_t color);
-void colors_to_symbols(char *symbols, const cell_color_t *colors, size_t length);
+point_t  point_new_noheap(int32_t x, int32_t y);
+point_t *point_new(int32_t x, int32_t y);
+char     color_to_symbol(cell_color_t color);
+void     colors_to_symbols(char *symbols, const cell_color_t *colors, size_t length);
 
 #endif

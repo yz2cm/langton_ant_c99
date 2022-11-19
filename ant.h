@@ -3,8 +3,8 @@
 #include "common.h"
 
 ant_t ant_new();
-ant_t move_forward_ant(const ant_t* ant);
-ant_t rotate_right_ant(const ant_t* ant);
-ant_t rotate_left_ant(const ant_t* ant);
+ant_t ant_move_forward(const ant_t* ant);
+ant_t ant_rotate_right(const ant_t* ant);
+ant_t ant_rotate_left(const ant_t* ant);
 
 #endif

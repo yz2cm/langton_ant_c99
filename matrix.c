@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "matrix.h"
 #include "common.h"
+#include "matrix_line_list.h"
 
 matrix_t *matrix_new() {
     matrix_t *matrix = malloc(sizeof(*matrix));

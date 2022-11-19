@@ -6,15 +6,7 @@
 #include "matrix_line_list.h"
 #include "play.h"
 
-void write_symbols(const matrix_line_t *a_line) {
-    char *line = malloc(a_line->length * sizeof(*line) + 1);
-    colors_to_symbols(line, a_line->colors, a_line->length);
-    line[a_line->length] = '\0';
-
-    printf("%s\n", line);
-
-    free(line);
-}
+void write_symbols(const matrix_line_t *a_line);
 
 int main (void) {
     black_point_list_t *result = play(20000);
@@ -24,4 +16,14 @@ int main (void) {
     matrix_line_list_map(line_list, write_symbols);
 
     return 0;
+}
+
+void write_symbols(const matrix_line_t *a_line) {
+    char *line = malloc(a_line->length * sizeof(*line) + 1);
+    colors_to_symbols(line, a_line->colors, a_line->length);
+    line[a_line->length] = '\0';
+
+    printf("%s\n", line);
+
+    free(line);
 }

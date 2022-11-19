@@ -2,7 +2,7 @@
 #include "black_point_list.h"
 #include "matrix.h"
 
-black_point_list_t *black_point_list_new() {
+black_point_list_t *black_point_list_new(void) {
     black_point_list_t* list = malloc(sizeof(*list));
     list->points = NULL;
     list->length = 0;
@@ -119,7 +119,9 @@ int32_t black_point_list_min_y(const black_point_list_t *list) {
 size_t black_point_list_width(black_point_list_t *list) {
     int32_t min_x = black_point_list_min_x(list);
     int32_t max_x = black_point_list_max_x(list);
+    #pragma GCC diagnostic ignored "-Wsign-conversion"
     size_t width = max_x - min_x + 1;
+    #pragma GCC diagnostic warning "-Wsign-conversion"
 
     return width;
 }

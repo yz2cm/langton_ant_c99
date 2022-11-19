@@ -3,7 +3,7 @@
 #include "common.h"
 #include "matrix_line_list.h"
 
-matrix_t *matrix_new() {
+matrix_t *matrix_new(void) {
     matrix_t *matrix = malloc(sizeof(*matrix));
     matrix->colors = NULL;
     matrix->length = 0;
@@ -18,7 +18,7 @@ void matrix_add_cell(matrix_t *matrix, cell_color_t a_color) {
     }
 
     size_t capacity_needs = (matrix->length + 1) * sizeof(*(matrix->colors));
-    if (matrix->colors == NULL || matrix->capacity < capacity_needs) {
+    if (matrix->capacity < capacity_needs) {
         matrix->colors = realloc(matrix->colors, capacity_needs * 2);
         matrix->capacity = capacity_needs * 2;
     }

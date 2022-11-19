@@ -3,7 +3,7 @@
 #include <stddef.h>
 #include "common.h"
 
-matrix_t           *matrix_new();
+matrix_t           *matrix_new(void);
 void                matrix_add_cell(matrix_t *matrix, cell_color_t a_color);
 matrix_line_list_t *matrix_split(const matrix_t *matrix, size_t width);
 

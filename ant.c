@@ -1,7 +1,7 @@
 #include "ant.h"
 #include "common.h"
 
-ant_t ant_new() {
+ant_t ant_new(void) {
     ant_t ant = {
         .direction = TO_LEFT,
         .point = point_new_noheap(0, 0)

@@ -59,7 +59,7 @@ void black_point_list_add(black_point_list_t *list, point_t point) {
         return;
     }
 
-    size_t capacity_needs = (list->length + 1) * sizeof(*(list->points));
+    const size_t capacity_needs = (list->length + 1) * sizeof(*(list->points));
     if (list->capacity < capacity_needs) {
         list->points = realloc(list->points, capacity_needs * 2);
         list->capacity = capacity_needs * 2;
@@ -116,22 +116,19 @@ int32_t black_point_list_min_y(const black_point_list_t *list) {
     return min_y;
 }
 
-size_t black_point_list_width(black_point_list_t *list) {
-    int32_t min_x = black_point_list_min_x(list);
-    int32_t max_x = black_point_list_max_x(list);
+size_t black_point_list_width(const black_point_list_t *list) {
+    const int32_t min_x = black_point_list_min_x(list);
+    const int32_t max_x = black_point_list_max_x(list);
     #pragma GCC diagnostic ignored "-Wsign-conversion"
-    size_t width = max_x - min_x + 1;
+    const size_t width = max_x - min_x + 1;
     #pragma GCC diagnostic warning "-Wsign-conversion"
 
     return width;
 }
 
 matrix_t* black_point_list_to_matrix(const black_point_list_t *list) {
-    point_t min, max;
-    min.x = black_point_list_min_x(list);
-    min.y = black_point_list_min_y(list);
-    max.x = black_point_list_max_x(list);
-    max.y = black_point_list_max_y(list);
+    const point_t min = point_new_noheap(black_point_list_min_x(list), black_point_list_min_y(list));
+    const point_t max = point_new_noheap(black_point_list_max_x(list), black_point_list_max_y(list));
     matrix_t *matrix = matrix_new();
     point_t point = point_new_noheap(0, 0);
 

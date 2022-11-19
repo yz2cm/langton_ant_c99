@@ -19,7 +19,7 @@ void matrix_line_list_add(matrix_line_list_t *line_list, const cell_color_t *col
 
 void matrix_line_list_map(const matrix_line_list_t *line_list, void (*call_back)(const matrix_line_t *)) {
     for (size_t i = 0; i < line_list->length ; ++i) {
-        matrix_line_t *a_line = line_list->lines + i;
+        const matrix_line_t *a_line = line_list->lines + i;
         call_back(a_line);
     }
 }

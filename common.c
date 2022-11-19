@@ -2,7 +2,7 @@
 #include "common.h"
 
 point_t point_new_noheap(int32_t x, int32_t y) {
-    point_t point = {
+    const point_t point = {
         .x = x,
         .y = y,
         .used = true

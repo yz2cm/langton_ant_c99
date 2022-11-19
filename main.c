@@ -9,10 +9,11 @@
 void write_symbols(const matrix_line_t *a_line);
 
 int main (void) {
-    black_point_list_t *result = play(20000);
-    matrix_t *matrix = black_point_list_to_matrix(result);
-    size_t width = black_point_list_width(result);
-    matrix_line_list_t *line_list = matrix_split(matrix, width);
+    const black_point_list_t *result = play(20000);
+    const matrix_t *matrix = black_point_list_to_matrix(result);
+    const size_t width = black_point_list_width(result);
+    const matrix_line_list_t *line_list = matrix_split(matrix, width);
+
     matrix_line_list_map(line_list, write_symbols);
 
     return 0;

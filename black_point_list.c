@@ -38,6 +38,10 @@ point_t *black_point_list_find(const black_point_list_t *list, point_t point) {
     return NULL;
 }
 
+bool black_point_list_contains(const black_point_list_t *list, point_t point) {
+    return black_point_list_find(list, point) != NULL;
+}
+
 void black_point_list_add(black_point_list_t *list, point_t point) {
     if (list == NULL) {
         return;

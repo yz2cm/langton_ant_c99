@@ -1,21 +1,26 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "common.h"
 #include "matrix.h"
 #include "black_point_list.h"
 #include "play.h"
 
-void write_symbol(cell_color_t *colors, size_t length) {
-    for(size_t i = 0; i < length; ++i) {
-        printf("%c", color_to_symbol(colors[i]));
-    }
-    printf("\n");
+void write_symbols(const matrix_line_t *a_line) {
+    char *line = malloc(a_line->length * sizeof(*line) + 1);
+    colors_to_symbols(line, a_line->colors, a_line->length);
+    line[a_line->length] = '\0';
+
+    printf("%s\n", line);
+
+    free(line);
 }
 
 int main (void) {
     black_point_list_t *result = play(20000);
     matrix_t *matrix = black_points_to_matrix(result);
     size_t width = width_of_black_point_list(result);
-    matrix_map(matrix, width, write_symbol);
+    matrix_line_list_t *line_list = matrix_split(matrix, width);
+    matrix_line_list_map(line_list, write_symbols);
 
     return 0;
 }

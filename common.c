@@ -27,3 +27,9 @@ char color_to_symbol(cell_color_t color) {
         return 'X';
     }
 }
+
+void colors_to_symbols(char *symbols, const cell_color_t *colors, size_t length) {
+    for(size_t i = 0; i < length; ++i) {
+        symbols[i] = color_to_symbol(colors[i]);
+    }
+}

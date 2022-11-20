@@ -4,6 +4,7 @@
 
 black_point_list_t *black_point_list_new(void);
 void                black_point_list_resize(black_point_list_t *list, size_t new_capacity);
+size_t              black_point_list_calc_capacity_needed(const black_point_list_t *list, size_t count);
 point_t            *black_point_list_find(const black_point_list_t *list, point_t point);
 bool                black_point_list_contains(const black_point_list_t *list, point_t point);
 void                black_point_list_add(black_point_list_t *list, point_t point);

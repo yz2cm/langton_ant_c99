@@ -13,9 +13,11 @@ point_t point_new_noheap(int32_t x, int32_t y) {
 
 point_t* point_new(int32_t x, int32_t y) {
     point_t* point_ = malloc(sizeof(*point_));
-    point_->x = x;
-    point_->y = y;
-    point_->used = true;
+    {
+        point_->x = x;
+        point_->y = y;
+        point_->used = true;
+    }
 
     return point_;
 }

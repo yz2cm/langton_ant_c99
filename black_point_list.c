@@ -4,9 +4,11 @@
 
 black_point_list_t *black_point_list_new(void) {
     black_point_list_t* list = malloc(sizeof(*list));
-    list->points = NULL;
-    list->length = 0;
-    list->capacity = 0;
+    {
+        list->points = NULL;
+        list->length = 0;
+        list->capacity = 0;
+    }
 
     return list;
 }

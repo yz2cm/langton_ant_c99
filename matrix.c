@@ -6,11 +6,13 @@
 
 matrix_t *matrix_new(size_t width, size_t height) {
     matrix_t *matrix = malloc(sizeof(*matrix));
-    matrix->width = width;
-    matrix->height = height;
-    matrix->length = width * height;
-    matrix->capacity = matrix->length * sizeof(*(matrix->colors));
-    matrix->colors = malloc(matrix->capacity);
+    {
+        matrix->width = width;
+        matrix->height = height;
+        matrix->length = width * height;
+        matrix->capacity = matrix->length * sizeof(*(matrix->colors));
+        matrix->colors = malloc(matrix->capacity);
+    }
 
     return matrix;
 }
@@ -40,11 +42,16 @@ matrix_line_list_t *matrix_split(const matrix_t *matrix) {
 }
 
 matrix_t* matrix_from(const black_point_list_t *list) {
-    const point_t min = point_new_noheap(black_point_list_min_x(list), black_point_list_min_y(list));
+
     const point_t max = point_new_noheap(black_point_list_max_x(list), black_point_list_max_y(list));
-    const size_t width =  (size_t)max.x - (size_t)min.x + 1;
-    const size_t height = (size_t)max.y - (size_t)min.y + 1;
-    matrix_t *matrix = matrix_new(width, height);
+    const point_t min = point_new_noheap(black_point_list_min_x(list), black_point_list_min_y(list));
+
+    matrix_t *matrix;
+    {
+        const size_t width =  (size_t)max.x - (size_t)min.x + 1;
+        const size_t height = (size_t)max.y - (size_t)min.y + 1;
+        matrix = matrix_new(width, height);
+    }
 
     for(int32_t y = min.y; y <= max.y; ++y) {
         for(int32_t x = min.x; x <= max.x; ++x) {

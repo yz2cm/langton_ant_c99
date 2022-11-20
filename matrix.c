@@ -31,8 +31,9 @@ matrix_line_list_t *matrix_split(const matrix_t *matrix) {
     matrix_line_list_t *line_list = matrix_line_list_new();
 
     for (size_t i = 0; i < matrix->length; i += matrix->width) {
-        const size_t width_ = (i + matrix->width) < matrix->length ? matrix->width : matrix->length - i;
-        matrix_line_list_add(line_list, matrix->colors + i, width_);
+        const cell_color_t *colors = matrix->colors + i;
+        const size_t colors_length = matrix->width <= (matrix->length - i) ? matrix->width : (matrix->length - i);
+        matrix_line_list_add(line_list, colors, colors_length);
     }
 
     return line_list;

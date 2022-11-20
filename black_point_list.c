@@ -103,23 +103,3 @@ int32_t black_point_list_min_y(const black_point_list_t *list) {
 
     return min_y;
 }
-
-size_t black_point_list_width(const black_point_list_t *list) {
-    const int32_t min_x = black_point_list_min_x(list);
-    const int32_t max_x = black_point_list_max_x(list);
-    #pragma GCC diagnostic ignored "-Wsign-conversion"
-    const size_t width = max_x - min_x + 1;
-    #pragma GCC diagnostic warning "-Wsign-conversion"
-
-    return width;
-}
-
-size_t black_point_list_height(const black_point_list_t *list) {
-    const int32_t min_y = black_point_list_min_y(list);
-    const int32_t max_y = black_point_list_max_y(list);
-    #pragma GCC diagnostic ignored "-Wsign-conversion"
-    const size_t height = max_y - min_y + 1;
-    #pragma GCC diagnostic warning "-Wsign-conversion"
-
-    return height;
-}

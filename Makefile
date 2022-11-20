@@ -9,7 +9,7 @@ CFLAGS        = -O2 -std=c99 -pedantic -Wall -Wextra \
 				-Wwrite-strings -Wunused-macros
 #LDFLAGS       = -L/usr/local/lib
 #LIBS          = -lhoge -lm
-OBJS          = main.o common.o ant.o matrix.o matrix_line_list.o black_point_list.o play.o
+OBJS          = main.o common.o ant.o matrix.o matrix_line_list.o matrix_line.o black_point_list.o play.o
 PROGRAM       = langton_ant
 
 all:            $(PROGRAM)

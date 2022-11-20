@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "common.h"
 #include "matrix_line_list.h"
+#include "matrix_line.h"
 
 matrix_line_list_t *matrix_line_list_new(void) {
     matrix_line_list_t *line_list = malloc(sizeof(*line_list));
@@ -14,8 +15,7 @@ matrix_line_list_t *matrix_line_list_new(void) {
 
 void matrix_line_list_add(matrix_line_list_t *line_list, const cell_color_t *colors, size_t length) {
     line_list->lines = realloc(line_list->lines, (line_list->length + 1) * sizeof(*(line_list->lines)));
-    (line_list->lines + line_list->length)->colors = colors;
-    (line_list->lines + line_list->length)->length = length;
+    line_list->lines[line_list->length] = matrix_line_new_noheap(colors, length);
     line_list->length++;
 }
 

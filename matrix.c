@@ -72,6 +72,9 @@ void matrix_plot_points(matrix_t *matrix, const black_point_list_t *list, cell_c
 
     for (size_t i = 0; i < list->length; ++i) {
         const point_t *a_point = list->points + i;
+        if (! a_point->used) {
+            continue;
+        }
         const size_t offset_x = (size_t)a_point->x - (size_t)min.x;
         const size_t offset_y = (size_t)a_point->y - (size_t)min.y;
 

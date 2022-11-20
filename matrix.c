@@ -13,14 +13,15 @@ matrix_t *matrix_new(size_t width, size_t height) {
         matrix->capacity = matrix->length * sizeof(*(matrix->colors));
         matrix->colors = malloc(matrix->capacity);
     }
-
+    matrix_fill_with(matrix, WHITE);
+ 
     return matrix;
 }
 
 void matrix_fill_with(matrix_t *matrix, cell_color_t color) {
     for (size_t y = 0; y < matrix->height; ++y) {
         for (size_t x = 0; x < matrix->width; ++x) {
-            matrix->colors[y * matrix->width + x] = color;
+            matrix_set_cell(matrix, x, y, color);
         }
     }
 }
@@ -60,7 +61,6 @@ matrix_t* matrix_from(const black_point_list_t *list) {
         matrix = matrix_new(width, height);
     }
 
-    matrix_fill_with(matrix, WHITE);
     matrix_plot_points(matrix, list, BLACK);
 
     return matrix;

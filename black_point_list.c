@@ -11,6 +11,17 @@ black_point_list_t *black_point_list_new(void) {
     return list;
 }
 
+void black_point_list_resize(black_point_list_t *list, size_t new_capacity) {
+        if (list == NULL) {
+            return;
+        }
+
+        if (list->capacity < new_capacity) {
+            list->points = realloc(list->points, new_capacity);
+            list->capacity = new_capacity;
+        }
+}
+
 point_t *black_point_list_find(const black_point_list_t *list, point_t point) {
     if (list == NULL) {
         return NULL;
@@ -47,8 +58,7 @@ void black_point_list_add(black_point_list_t *list, point_t point) {
         // register new entry if not exist.
         const size_t capacity_needs = (list->length + 1) * sizeof(*(list->points));
         if (list->capacity < capacity_needs) {
-            list->points = realloc(list->points, capacity_needs * 2);
-            list->capacity = capacity_needs * 2;
+            black_point_list_resize(list, capacity_needs * 2);
         }
         *(list->points + list->length) = point;
         list->length++;

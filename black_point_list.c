@@ -24,8 +24,8 @@ void black_point_list_resize(black_point_list_t *list, size_t new_capacity) {
         list->capacity = new_capacity;
 }
 
-size_t black_point_list_calc_capacity_needed(const black_point_list_t *list, size_t count) {
-    const size_t capacity_needed = (list->length + count) * sizeof(*(list->points));
+size_t black_point_list_calc_capacity_needed(const black_point_list_t *list, size_t points_length) {
+    const size_t capacity_needed = points_length * sizeof(*(list->points));
     if(list->capacity < capacity_needed) {
         return capacity_needed * 2;
     } else {
@@ -67,7 +67,7 @@ void black_point_list_add(black_point_list_t *list, point_t point) {
         point_->used = true;
     } else {
         // register new entry if not exist.
-        const size_t capacity_needs = black_point_list_calc_capacity_needed(list, (size_t)1);
+        const size_t capacity_needs = black_point_list_calc_capacity_needed(list, list->length + 1);
         black_point_list_resize(list, capacity_needs);
         *(list->points + list->length) = point;
         list->length++;

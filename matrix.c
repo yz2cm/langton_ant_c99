@@ -2,38 +2,62 @@
 #include "matrix.h"
 #include "common.h"
 #include "matrix_line_list.h"
+#include "black_point_list.h"
 
-matrix_t *matrix_new(void) {
+matrix_t *matrix_new(size_t width, size_t height) {
     matrix_t *matrix = malloc(sizeof(*matrix));
-    matrix->colors = NULL;
-    matrix->length = 0;
-    matrix->capacity = 0;
+    matrix->width = width;
+    matrix->height = height;
+    matrix->length = width * height;
+    matrix->capacity = matrix->length * sizeof(*(matrix->colors));
+    matrix->colors = malloc(matrix->capacity);
 
     return matrix;
 }
 
-void matrix_add_cell(matrix_t *matrix, cell_color_t a_color) {
+void matrix_set_cell(matrix_t *matrix, size_t x, size_t y, cell_color_t color) {
     if (matrix == NULL) {
         return;
     }
-
-    const size_t capacity_needs = (matrix->length + 1) * sizeof(*(matrix->colors));
-    if (matrix->capacity < capacity_needs) {
-        matrix->colors = realloc(matrix->colors, capacity_needs * 2);
-        matrix->capacity = capacity_needs * 2;
+    
+    if (matrix->width <= x || matrix->height <= y) {
+        return;
     }
 
-    matrix->colors[matrix->length] = a_color;
-    matrix->length++;
+    matrix->colors[y * matrix->width + x] = color;
 }
 
-matrix_line_list_t *matrix_split(const matrix_t *matrix, size_t width) {
+matrix_line_list_t *matrix_split(const matrix_t *matrix) {
     matrix_line_list_t *line_list = matrix_line_list_new();
 
-    for (size_t i = 0; i < matrix->length; i += width) {
-        const size_t width_ = (i + width) < matrix->length ? width : matrix->length - i;
+    for (size_t i = 0; i < matrix->length; i += matrix->width) {
+        const size_t width_ = (i + matrix->width) < matrix->length ? matrix->width : matrix->length - i;
         matrix_line_list_add(line_list, matrix->colors + i, width_);
     }
 
     return line_list;
 }
+
+matrix_t* matrix_from(const black_point_list_t *list) {
+    const point_t min = point_new_noheap(black_point_list_min_x(list), black_point_list_min_y(list));
+    const point_t max = point_new_noheap(black_point_list_max_x(list), black_point_list_max_y(list));
+    const size_t width =  (size_t)max.x - (size_t)min.x + 1;
+    const size_t height = (size_t)max.y - (size_t)min.y + 1;
+    matrix_t *matrix = matrix_new(width, height);
+
+    for(int32_t y = min.y; y <= max.y; ++y) {
+        for(int32_t x = min.x; x <= max.x; ++x) {
+            const size_t offset_x = (size_t)x - (size_t)min.x;
+            const size_t offset_y = (size_t)y - (size_t)min.y;
+
+            if (black_point_list_contains(list, point_new_noheap(x, y))) {
+                matrix_set_cell(matrix, offset_x, offset_y, BLACK);
+            } else {
+                matrix_set_cell(matrix, offset_x, offset_y, WHITE);
+            }
+        }
+    }
+
+    return matrix;
+}
+

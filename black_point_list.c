@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include "black_point_list.h"
-#include "matrix.h"
+#include "common.h"
 
 black_point_list_t *black_point_list_new(void) {
     black_point_list_t* list = malloc(sizeof(*list));
@@ -114,20 +114,12 @@ size_t black_point_list_width(const black_point_list_t *list) {
     return width;
 }
 
-matrix_t* black_point_list_to_matrix(const black_point_list_t *list) {
-    const point_t min = point_new_noheap(black_point_list_min_x(list), black_point_list_min_y(list));
-    const point_t max = point_new_noheap(black_point_list_max_x(list), black_point_list_max_y(list));
-    matrix_t *matrix = matrix_new();
+size_t black_point_list_height(const black_point_list_t *list) {
+    const int32_t min_y = black_point_list_min_y(list);
+    const int32_t max_y = black_point_list_max_y(list);
+    #pragma GCC diagnostic ignored "-Wsign-conversion"
+    const size_t height = max_y - min_y + 1;
+    #pragma GCC diagnostic warning "-Wsign-conversion"
 
-    for(int32_t y = min.y; y <= max.y; ++y) {
-        for(int32_t x = min.x; x <= max.x; ++x) {
-            if (black_point_list_contains(list, point_new_noheap(x, y))) {
-                matrix_add_cell(matrix, BLACK);
-            } else {
-                matrix_add_cell(matrix, WHITE);
-            }
-        }
-    }
-
-    return matrix;
+    return height;
 }

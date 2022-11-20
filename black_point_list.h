@@ -12,6 +12,6 @@ int32_t             black_point_list_min_x(const black_point_list_t *list);
 int32_t             black_point_list_max_y(const black_point_list_t *list);
 int32_t             black_point_list_min_y(const black_point_list_t *list);
 size_t              black_point_list_width(const black_point_list_t *list);
-matrix_t           *black_point_list_to_matrix(const black_point_list_t *list);
+size_t              black_point_list_height(const black_point_list_t *list);
 
 #endif

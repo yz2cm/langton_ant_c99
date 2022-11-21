@@ -37,8 +37,6 @@ typedef struct {
     cell_color_t *colors;
     size_t width;
     size_t height;
-    size_t length;
-    size_t capacity;
 } matrix_t;
 
 typedef struct {

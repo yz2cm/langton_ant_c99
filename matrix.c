@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <string.h>
 #include "matrix.h"
 #include "common.h"
 #include "matrix_line_list.h"
@@ -9,21 +10,16 @@ matrix_t *matrix_new(size_t width, size_t height) {
     {
         matrix->width = width;
         matrix->height = height;
-        matrix->length = width * height;
-        matrix->capacity = matrix->length * sizeof(*(matrix->colors));
-        matrix->colors = malloc(matrix->capacity);
+        size_t capacity = height * width * sizeof(*(matrix->colors));
+        matrix->colors = malloc(capacity);
+        memset(matrix->colors, (int)WHITE, capacity);
     }
-    matrix_fill_with(matrix, WHITE);
- 
+
     return matrix;
 }
 
-void matrix_fill_with(matrix_t *matrix, cell_color_t color) {
-    for (size_t y = 0; y < matrix->height; ++y) {
-        for (size_t x = 0; x < matrix->width; ++x) {
-            matrix_set_cell(matrix, x, y, color);
-        }
-    }
+size_t matrix_length(const matrix_t *matrix) {
+    return matrix->height * matrix->width;
 }
 
 void matrix_set_cell(matrix_t *matrix, size_t x, size_t y, cell_color_t color) {
@@ -40,10 +36,11 @@ void matrix_set_cell(matrix_t *matrix, size_t x, size_t y, cell_color_t color) {
 
 matrix_line_list_t *matrix_split(const matrix_t *matrix) {
     matrix_line_list_t *line_list = matrix_line_list_new();
+    const size_t matrix_len = matrix_length(matrix);
 
-    for (size_t i = 0; i < matrix->length; i += matrix->width) {
+    for (size_t i = 0; i < matrix_len; i += matrix->width) {
         const cell_color_t *colors = matrix->colors + i;
-        const size_t colors_length = matrix->width <= (matrix->length - i) ? matrix->width : (matrix->length - i);
+        const size_t colors_length = matrix->width <= (matrix_len - i) ? matrix->width : (matrix_len - i);
         matrix_line_list_add(line_list, colors, colors_length);
     }
 
@@ -68,16 +65,10 @@ matrix_t* matrix_from(const black_point_list_t *list) {
 
 void matrix_plot_points(matrix_t *matrix, const black_point_list_t *list, cell_color_t color) {
 
-    const point_t min = point_new_noheap(black_point_list_min_x(list), black_point_list_min_y(list));
-
     for (size_t i = 0; i < list->length; ++i) {
-        const point_t *a_point = list->points + i;
-        if (! a_point->used) {
+        if (! list->points[i].used) {
             continue;
         }
-        const size_t offset_x = (size_t)a_point->x - (size_t)min.x;
-        const size_t offset_y = (size_t)a_point->y - (size_t)min.y;
-
-        matrix_set_cell(matrix, offset_x, offset_y, color);
+        matrix_set_cell(matrix, (size_t)list->points[i].x, (size_t)list->points[i].y, color);
     }
 }

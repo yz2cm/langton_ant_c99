@@ -122,3 +122,13 @@ int32_t black_point_list_min_y(const black_point_list_t *list) {
 
     return min_y;
 }
+
+void black_point_list_normalize_point(black_point_list_t *list) {
+    int min_x = black_point_list_min_x(list);
+    int min_y = black_point_list_min_y(list);
+
+    for (size_t i = 0; i < list->length; ++i) {
+        list->points[i].x -= min_x;
+        list->points[i].y -= min_y;
+    }
+}

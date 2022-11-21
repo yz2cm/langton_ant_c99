@@ -13,6 +13,7 @@ black_point_list_t *play(uint32_t step) {
             ant = play_ant_on_white(&ant, list);
         }
     }
+    black_point_list_normalize_point(list);
 
     return list;
 }

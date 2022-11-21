@@ -9,8 +9,7 @@
 void write_symbols(const matrix_line_t *a_line);
 
 int main (void) {
-    black_point_list_t *result = play(20000);
-    black_point_list_normalize_point(result);
+    const black_point_list_t *result = play(20000);
     const matrix_t *matrix = matrix_from(result);
     const matrix_line_list_t *line_list = matrix_split(matrix);
 

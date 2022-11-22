@@ -15,9 +15,15 @@ black_point_list_t *black_point_list_new(void) {
 }
 
 void black_point_list_free(black_point_list_t *list) {
-    if (list != NULL) {
-        free(list);
+    if (list == NULL) {
+        return;
     }
+
+    if (list->points != NULL) {
+        free(list->points);
+        list->points= NULL;
+    }
+    free(list);
 }
 
 black_point_list_t *black_point_list_clone(const black_point_list_t *list) {

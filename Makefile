@@ -17,4 +17,4 @@ all:            $(PROGRAM)
 $(PROGRAM):		$(OBJS)
 				$(CC) $(OBJS) $(LDFLAGS) $(LIBS) -o $(PROGRAM)
 
-clean:;         rm -f *.o src/*.o src/*.gch *~ $(PROGRAM)
+clean:;         rm -f *.o src/*.o include/*.gch *~ $(PROGRAM)

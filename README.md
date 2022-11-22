@@ -4,5 +4,5 @@
 ```bash
 $ cd langton_ant_c99
 $ make
-$ ./langton_ant
+$ ./build/langton_ant
 ```

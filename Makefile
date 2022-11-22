@@ -9,7 +9,7 @@ CFLAGS        = -O2 -std=c99 -pedantic -Wall -Wextra \
 				-Wwrite-strings -Wunused-macros
 #LDFLAGS       = -L/usr/local/lib
 #LIBS          = -lhoge -lm
-OBJS          = main.o src/common.o src/ant.o src/matrix.o src/matrix_line_list.o src/matrix_line.o src/black_point_list.o src/play.o
+OBJS          = main.o src/common.o src/ant.o src/matrix.o src/matrix_line_list.o src/matrix_line.o src/black_point_list.o src/play.o src/automaton_context.o
 PROGRAM       = build/langton_ant
 
 all:            $(PROGRAM)

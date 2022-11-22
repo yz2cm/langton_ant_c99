@@ -1,6 +1,14 @@
 #include <stdlib.h>
 #include "../include/common.h"
 
+direction_t direction_rotate_right(direction_t direction) {
+    return (direction + 1) % 4;
+}
+
+direction_t direction_rotate_left(direction_t direction) {
+    return (direction + 3) % 4;
+}
+
 point_t point_new_noheap(int32_t x, int32_t y) {
     const point_t point = {
         .x = x,
@@ -20,6 +28,23 @@ point_t* point_new(int32_t x, int32_t y) {
     }
 
     return point_;
+}
+
+point_t point_move_forward(point_t point, direction_t direction) {
+    if (direction == TO_UP) {
+        return point_new_noheap(point.x, point.y - 1);
+    }
+    if (direction == TO_RIGHT) {
+        return point_new_noheap(point.x + 1, point.y);
+    }
+    if (direction == TO_DOWN) {
+        return point_new_noheap(point.x, point.y + 1);
+    }
+    if (direction == TO_LEFT) {
+        return point_new_noheap(point.x - 1, point.y);
+    }
+
+    return point;
 }
 
 char color_to_symbol(cell_color_t color) {

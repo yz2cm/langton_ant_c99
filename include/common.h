@@ -49,9 +49,18 @@ typedef struct {
     size_t length;
 } matrix_line_list_t;
 
-point_t  point_new_noheap(int32_t x, int32_t y);
-point_t *point_new(int32_t x, int32_t y);
-char     color_to_symbol(cell_color_t color);
-void     colors_to_symbols(char *symbols, const cell_color_t *colors, size_t length);
+typedef struct {
+    direction_t direction;
+    point_t point;
+    black_point_list_t *black_point_list;
+} automaton_context_t;
+
+direction_t direction_rotate_right(direction_t direction);
+direction_t direction_rotate_left(direction_t direction);
+point_t     point_new_noheap(int32_t x, int32_t y);
+point_t    *point_new(int32_t x, int32_t y);
+point_t     point_move_forward(point_t point, direction_t direction);
+char        color_to_symbol(cell_color_t color);
+void        colors_to_symbols(char *symbols, const cell_color_t *colors, size_t length);
 
 #endif

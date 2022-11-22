@@ -9,7 +9,11 @@
 void write_symbols(const matrix_line_t *a_line);
 
 int main (void) {
+    #ifdef __AUTOMATON__
+    const black_point_list_t *result = play_automaton(20000);
+    #else
     const black_point_list_t *result = play(20000);
+    #endif
     const matrix_t *matrix = matrix_from(result);
     const matrix_line_list_t *line_list = matrix_split(matrix);
 

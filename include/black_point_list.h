@@ -3,6 +3,8 @@
 #include "common.h"
 
 black_point_list_t *black_point_list_new(void);
+void                black_point_list_free(black_point_list_t *list);
+black_point_list_t *black_point_list_clone(const black_point_list_t *list);
 void                black_point_list_resize(black_point_list_t *list, size_t new_capacity);
 size_t              black_point_list_calc_new_capacity(size_t current_capacity, size_t new_points_length);
 point_t            *black_point_list_find(const black_point_list_t *list, point_t point);

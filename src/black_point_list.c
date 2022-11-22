@@ -1,9 +1,10 @@
 #include <stdlib.h>
+#include <string.h>
 #include "../include/black_point_list.h"
 #include "../include/common.h"
 
 black_point_list_t *black_point_list_new(void) {
-    black_point_list_t* list = malloc(sizeof(*list));
+    black_point_list_t *list = malloc(sizeof(*list));
     {
         list->points = NULL;
         list->length = 0;
@@ -11,6 +12,26 @@ black_point_list_t *black_point_list_new(void) {
     }
 
     return list;
+}
+
+void black_point_list_free(black_point_list_t *list) {
+    if (list != NULL) {
+        free(list);
+    }
+}
+
+black_point_list_t *black_point_list_clone(const black_point_list_t *list) {
+
+    black_point_list_t *list_new = black_point_list_new();
+    black_point_list_resize(list_new, list->capacity);
+
+    if (list->points != NULL) {
+        memcpy(list_new->points, list->points, list->capacity);
+    }
+    list_new->length = list->length;
+    list_new->capacity = list->capacity;
+
+    return list_new;
 }
 
 void black_point_list_resize(black_point_list_t *list, size_t new_capacity) {

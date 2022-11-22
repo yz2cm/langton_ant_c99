@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "common.h"
+#include "../include/common.h"
 
 point_t point_new_noheap(int32_t x, int32_t y) {
     const point_t point = {

@@ -1,9 +1,9 @@
 #include <stdlib.h>
 #include <string.h>
-#include "matrix.h"
-#include "common.h"
-#include "matrix_line_list.h"
-#include "black_point_list.h"
+#include "../include/matrix.h"
+#include "../include/common.h"
+#include "../include/matrix_line_list.h"
+#include "../include/black_point_list.h"
 
 matrix_t *matrix_new(size_t width, size_t height) {
     matrix_t *matrix = malloc(sizeof(*matrix));

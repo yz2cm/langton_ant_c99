@@ -1,7 +1,7 @@
 #include <stdlib.h>
-#include "common.h"
-#include "matrix_line_list.h"
-#include "matrix_line.h"
+#include "../include/common.h"
+#include "../include/matrix_line_list.h"
+#include "../include/matrix_line.h"
 
 matrix_line_list_t *matrix_line_list_new(void) {
     matrix_line_list_t *line_list = malloc(sizeof(*line_list));

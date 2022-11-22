@@ -1,6 +1,6 @@
 #include <stdlib.h>
-#include "black_point_list.h"
-#include "common.h"
+#include "../include/black_point_list.h"
+#include "../include/common.h"
 
 black_point_list_t *black_point_list_new(void) {
     black_point_list_t* list = malloc(sizeof(*list));

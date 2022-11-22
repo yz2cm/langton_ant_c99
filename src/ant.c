@@ -1,5 +1,5 @@
-#include "ant.h"
-#include "common.h"
+#include "../include/ant.h"
+#include "../include/common.h"
 
 ant_t ant_new(void) {
     ant_t ant = {

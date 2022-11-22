@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "common.h"
-#include "matrix.h"
-#include "black_point_list.h"
-#include "matrix_line_list.h"
-#include "play.h"
+#include "include/common.h"
+#include "include/matrix.h"
+#include "include/black_point_list.h"
+#include "include/matrix_line_list.h"
+#include "include/play.h"
 
 void write_symbols(const matrix_line_t *a_line);
 

@@ -1,6 +1,6 @@
-#include "play.h"
-#include "black_point_list.h"
-#include "ant.h"
+#include "../include/play.h"
+#include "../include/black_point_list.h"
+#include "../include/ant.h"
 
 black_point_list_t *play(uint32_t step) {
     ant_t ant = ant_new();
